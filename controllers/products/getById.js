@@ -3,7 +3,7 @@ const {HttpError}=require("../../utils")
 
 const getById=async(req,res)=>{
     const {id}=req.params;
-    const result=await Product.findById(id, "name remnant");
+    const result=await Product.findById(id);
     if(!result){
         throw HttpError(404, "Not found")
     }
