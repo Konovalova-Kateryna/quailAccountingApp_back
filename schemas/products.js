@@ -2,8 +2,6 @@ const {Schema, model}=require("mongoose");
 const {handleMongooseError}=require("../utils");
 
 const Joi=require("joi");
-const { type } = require("node:os");
-
 
 const productSchema=new Schema({
     title:{
