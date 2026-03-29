@@ -7,9 +7,10 @@ require('dotenv').config();
 
 const authRouter = require('./routes/api/auth');
 const productsRouter = require('./routes/api/products');
+const counterpartyRouter=require("./routes/api/counterparty");
 const ordersRouter=require("./routes/api/orders")
 const expensesRouter=require("./routes/api/expenses")
-const counterpartyRouter=require("./routes/api/counterparty")
+const transactionsRouter=require("./routes/api/transaction")
 
 const app = express();
 
@@ -21,17 +22,20 @@ app.use(express.json());
 
 app.use('/api/auth', authRouter);
 app.use('/api/products', productsRouter);
-app.use('/api/orders', ordersRouter);
-app.use('/api/expenses', expensesRouter);
 app.use('/api/counterparty', counterpartyRouter);
+app.use('/api/orders', orderRouter);
+app.use('/api/expenses', expenseRouter);
+// app.use('/api/transactions', transactionsRouter);
 
 app.use((req, res)=>{
-    res.status(404).json({message: 'Not found'});
+    res.status(404).json({message: 'Route not found'});
 }),
 
-app.use((err, req, res, next)=>{
-    res.status(500).json({message: err.message});
-})
+app.use((err, req, res, next) => {
+  const status  = err.status ?? 500;
+  const message = err.message ?? "Internal Server Error";
+  res.status(status).json({ message });
+});
 
 
 module.exports = app;

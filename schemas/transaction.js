@@ -1,12 +1,13 @@
 const {Schema, model}=require("mongoose");
 const {handleMongooseError}=require("../utils");
+const { type } = require("os");
 // const {Item}=require("./orderItem");
 // const Joi=require("joi");
 
 const itemSchema=new Schema({
 productId:{
     type:Schema.Types.ObjectId,
-    ref:"product",
+    ref:"Product",
     required:true
 },
 title:{
@@ -15,7 +16,8 @@ title:{
 },
 price:{
     type:Number,
-    required:true
+    required:true,
+    min:0
 },
 quantity:{
     type:Number,
@@ -26,6 +28,7 @@ total:{
     type:Number,
     required:true
 },
+
 },{_id:false,timestamps:true, versionKey:false});
 
 
@@ -33,20 +36,50 @@ const transactionSchema=new Schema({
 type:{
         type:String,
         enum:["order", "expense"],
-        required:true,
+        required:[true, "Transaction type is required"],
     },
 owner:{
     type:Schema.Types.ObjectId,
-    ref:"user",
+    ref:"User",
     required:true,    
 },
+counterparty:{
+    type:Schema.Types.ObjectId,
+    ref:"Counterparty",
+    default:null
+},
+orderDate:{
+type:Date,
+default:Date.now
+},
+shippingDate:{
+    type:Date,
+    default:Date.now
+},
 
-items:[itemSchema],
+items:{
+    type:[itemSchema],
+    validate:{
+        validator:(arr)=>arr.length>0,
+    message:"Transaction must have at least one item"
+    }
+},
 
 totalAmount:{
     type:Number,
-    required:true
+    required:true,
+    min:0
 },
+
+isPaid:{
+    type:Boolean,
+    default:false
+},
+isShipped:{
+    type:Boolean,
+    default:false
+},
+
 status:{
     type:String,
     enum:["new","processing","completed","canceled"],
@@ -54,13 +87,11 @@ status:{
     
 },
 comment:{
-    type:String
+    type:String,
+    trim:true,
+    default:""
 },
-date:{
-    type:Date,
-    default:Date.now,
-    required:true
-    }
+
 },{timestamps:true, versionKey:false});
 
 transactionSchema.post("save", handleMongooseError);

@@ -7,9 +7,14 @@ const getAllOrders=async(_,res)=>{
         type:"order"
     }
 
-    const result=await Transaction.find(filter).populate("owner", "name email").sort({date:-1});
+    const orders=await Transaction.find(filter)
+        .populate("owner", "name email")
+        .populate("counterparty", "name phone")
+        .sort({orderDate:-1});
+
     const total=result.reduce((acc, order)=>acc+order.totalAmount, 0)
-    res.json({orders:result, total})
+
+    res.json({orders, total})
 
 }
 
