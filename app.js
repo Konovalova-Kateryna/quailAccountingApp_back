@@ -23,8 +23,8 @@ app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/counterparty', counterpartyRouter);
-app.use('/api/orders', orderRouter);
-app.use('/api/expenses', expenseRouter);
+app.use('/api/orders', ordersRouter);
+app.use('/api/expenses', expensesRouter);
 // app.use('/api/transactions', transactionsRouter);
 
 app.use((req, res)=>{
