@@ -8,9 +8,9 @@ require('dotenv').config();
 const authRouter = require('./routes/api/auth');
 const productsRouter = require('./routes/api/products');
 const counterpartyRouter=require("./routes/api/counterparty");
-const ordersRouter=require("./routes/api/orders")
+const ordersRouter=require("./routes/api/order")
 const expensesRouter=require("./routes/api/expenses")
-const transactionsRouter=require("./routes/api/transaction")
+// const transactionsRouter=require("./routes/api/transaction")
 
 const app = express();
 
