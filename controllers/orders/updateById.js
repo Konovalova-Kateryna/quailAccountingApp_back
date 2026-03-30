@@ -1,5 +1,6 @@
 const {Transaction}=require("../../schemas/transaction");
 const { HttpError } = require("../../utils");
+const {addOrderItems}=require("./add")
 
 const updateOrder = async (req, res) => {
   // Спочатку знаходимо, потім перевіряємо права
@@ -20,7 +21,7 @@ const updateOrder = async (req, res) => {
 
   // Якщо передали нові товари — перераховуємо
   if (items) {
-    const { orderItems, totalAmount } = await buildOrderItems(items);
+    const { orderItems, totalAmount } = await addOrderItems(items);
     order.items       = orderItems;
     order.totalAmount = totalAmount;
   }

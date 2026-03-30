@@ -1,6 +1,7 @@
 const { HttpError } = require("../../utils");
 const {Product}=require("../../schemas/products");
 const {Transaction}=require("../../schemas/transaction")
+const {Counterparty}=require("../../schemas/counterparty")
 
 
 // Функція додавання товарів до транзакції
@@ -15,7 +16,7 @@ const addOrderItems=async(items)=>{
         if (!product){
             throw HttpError(404, `Product "${item.title}" not found`)
         }
-        if (!product.IsActive){
+        if (!product.isActive){
             throw HttpError(400, `Product "${item.title}" is not active`)
         }
 
@@ -111,4 +112,4 @@ const addOrder=async(req, res)=>{
     res.status(201).json(order)
 }
 
-module.exports=addOrder;
+module.exports={addOrder, addOrderItems};

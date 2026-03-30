@@ -4,9 +4,11 @@ const validateBody=(schema)=>{
     const func=(req,res,next)=>{
         const {error}=schema.validate(req.body);
         if(error){
-            next(HttpError(400, error.message));
+             const message = error.details.map((d) => d.message).join("; ");
+            return next(HttpError(400, message));
 
         }
+        req.body=value;
         next()
     }
     return func;

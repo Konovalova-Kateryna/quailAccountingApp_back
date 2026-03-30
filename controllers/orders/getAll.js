@@ -12,7 +12,7 @@ const getAllOrders=async(_,res)=>{
         .populate("counterparty", "name phone")
         .sort({orderDate:-1});
 
-    const total=result.reduce((acc, order)=>acc+order.totalAmount, 0)
+    const total=orders.reduce((acc, order)=>acc+order.totalAmount, 0)
 
     res.json({orders, total})
 

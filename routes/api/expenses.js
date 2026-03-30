@@ -1,10 +1,10 @@
 // ─── Маршрути для Витрат ─────────────────────────────────────────────────────
 // Всі маршрути витрат доступні тільки адміну
 const { Router } = require("express");
-const ctrl = require("../../controllers/expense");
+const ctrl = require("../../controllers/expenses");
 const { auth, adminOnly, isValidId, validateBody } = require("../../middlewares");
-const { createExpenseSchema, updateExpenseSchema } = require("../../validators/expense.validator");
 const { ctrlWrapper } = require("../../utils");
+const schemas=require("../../schemas/transaction")
 
 const router = Router();
 
@@ -17,7 +17,7 @@ const router = Router();
 router.post("/",
   auth,
   adminOnly,
-  validateBody(createExpenseSchema),
+  validateBody(schemas.expenseSchemas.createExpenseSchema),
   ctrlWrapper(ctrl.createExpense)
 );
 
@@ -38,7 +38,7 @@ router.put("/:id",
   auth,
   adminOnly,
   isValidId,
-  validateBody(updateExpenseSchema),
+  validateBody(schemas.expenseSchemas.updateExpenseSchema),
   ctrlWrapper(ctrl.updateExpense)
 );
 

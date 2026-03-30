@@ -1,4 +1,5 @@
-const { Transaction } = require("../../schemas/transaction")
+const { Transaction } = require("../../schemas/transaction");
+const { HttpError } = require("../../utils");
 
 const getOrderById=async(req, res)=>{
     const order = await Transaction.findOne({

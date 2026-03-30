@@ -1,7 +1,7 @@
 const {Schema, model}=require("mongoose");
 const {handleMongooseError}=require("../utils");
 const Joi=require("joi");
-const { type } = require("node:os");
+
 
 const itemSchema=new Schema({
 productId:{
@@ -30,7 +30,7 @@ total:{
 
 itemSchema.post("save", handleMongooseError);
 
-const additemSchema=Joi.object({
+const addItemSchema=Joi.object({
     productId:Joi.string().required(),
     title:Joi.string(),
     price:Joi.number().required(),
@@ -39,7 +39,7 @@ const additemSchema=Joi.object({
 })
 
 const schemas={
-    additemSchema
+    addItemSchema
 }
 
 const Item=model("item", itemSchema);

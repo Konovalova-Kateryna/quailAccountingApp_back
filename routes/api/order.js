@@ -1,9 +1,9 @@
 // ─── Маршрути для Замовлень ───────────────────────────────────────────────────
 const { Router } = require("express");
-const ctrl = require("../../controllers/order");
+const ctrl = require("../../controllers/orders");
 const { auth, adminOnly, isValidId, validateBody } = require("../../middlewares");
-const { createOrderSchema, updateOrderSchema } = require("../../validators/order.validator");
 const { ctrlWrapper } = require("../../utils");
+const schemas= require("../../schemas/transaction")
 
 const router = Router();
 
@@ -21,14 +21,14 @@ router.get("/:id", auth, isValidId, ctrlWrapper(ctrl.getOrderById));
 
 router.post("/",
   auth,
-  validateBody(createOrderSchema),
-  ctrlWrapper(ctrl.createOrder)
+  validateBody(schemas.orderSchemas.createOrderSchema),
+  ctrlWrapper(ctrl.addOrder)
 );
 
 router.put("/:id",
   auth,
   isValidId,
-  validateBody(updateOrderSchema),
+  validateBody(schemas.orderSchemas.updateOrderSchema),
   ctrlWrapper(ctrl.updateOrder)
 );
 
