@@ -1,7 +1,5 @@
-    const { HttpError } = require("../../utils");
-const {Product}=require("../../schemas/products");
-const {Transaction}=require("../../schemas/transaction");
-const {Counterparty}=require("../../schemas/counterparty");
+const { HttpError } = require("../utils");
+const {Counterparty}=require("../schemas/counterparty");
     
     // Функція знайти або створити клієнта
 /**

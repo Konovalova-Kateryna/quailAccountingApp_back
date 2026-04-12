@@ -1,5 +1,5 @@
-const { HttpError } = require("../../utils");
-const {Product}=require("../../schemas/products");
+const { HttpError } = require("../utils");
+const {Product}=require("../schemas/products");
 
 const addOrderItems=async(items)=>{
     const orderItems=[];
