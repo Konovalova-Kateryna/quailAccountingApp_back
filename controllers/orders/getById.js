@@ -11,6 +11,11 @@ const getOrderById=async(req, res)=>{
     if(!order){
         throw HttpError(404, "Order not found")
     }
+     // Перевірка прав: власник або admin
+const isOwner = order.owner._id.toString() === req.user._id.toString();
+const isAdmin = req.user.role === "admin";
+if (!isOwner && !isAdmin) throw HttpError(403, "Access denied");
+
     res.json(order)
 }
 
