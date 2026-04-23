@@ -1,6 +1,6 @@
 const getAll=require("./getAll");
 const getById=require("./getById");
-const getMy=require("./getMy");
+const getMyTransactions=require("./getMy");
 const add=require("./add");
 const updateById=require("./updateById");
 const removeById=require("./removeById");
@@ -8,7 +8,7 @@ const removeById=require("./removeById");
 module.exports={
     getAll,
     getById,
-    getMy,
+    getMyTransactions,
     add,
     updateById,
     removeById

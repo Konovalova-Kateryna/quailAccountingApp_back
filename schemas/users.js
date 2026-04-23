@@ -2,7 +2,7 @@ const {Schema, model}=require("mongoose");
 const {handleMongooseError}=require("../utils");
 const Joi=require("joi");
 
-const UserSchema=new Schema({    
+const userSchema=new Schema({    
     firebaseUid:{
         type:String,
         required:true,
@@ -30,7 +30,7 @@ const UserSchema=new Schema({
 
 },{timestamps:true});
 
-UserSchema.post("save", handleMongooseError);
+userSchema.post("save", handleMongooseError);
 
 const registerSchema=Joi.object({
     name:Joi.string().required(),
@@ -49,7 +49,7 @@ const schemas={
     loginSchema
 };
 
-const User=model("user", UserSchema);
+const User=model("User", userSchema);
 
 module.exports={
     User,

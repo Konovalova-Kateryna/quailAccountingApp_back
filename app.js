@@ -10,7 +10,7 @@ const productsRouter = require('./routes/api/products');
 const counterpartyRouter=require("./routes/api/counterparty");
 const ordersRouter=require("./routes/api/order")
 const expensesRouter=require("./routes/api/expenses")
-// const transactionsRouter=require("./routes/api/transaction")
+const transactionsRouter=require("./routes/api/transaction")
 
 const app = express();
 
@@ -25,7 +25,7 @@ app.use('/api/products', productsRouter);
 app.use('/api/counterparty', counterpartyRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/expenses', expensesRouter);
-// app.use('/api/transactions', transactionsRouter);
+app.use('/api/transactions', transactionsRouter);
 
 app.use((req, res)=>{
     res.status(404).json({message: 'Route not found'});

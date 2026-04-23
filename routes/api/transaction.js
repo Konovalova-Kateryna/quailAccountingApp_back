@@ -8,8 +8,10 @@ const adminOnly=require("../../middlewares/adminOnly");
 
 router.post("/", auth, ctrlWrapper(ctrl.add));
 
+router.get("/my", auth, ctrlWrapper(ctrl.getMyTransactions));
+
 router.get("/", auth, adminOnly, ctrlWrapper(ctrl.getAll));
-router.get("/my", auth, ctrlWrapper(ctrl.getMy));
+router.get("/:id", auth, adminOnly, ctrlWrapper(ctrl.getById));
 
 router.put("/:id", auth,ctrlWrapper(ctrl.updateById));
 router.put("/:id", auth, adminOnly, ctrlWrapper(ctrl.updateStatus));

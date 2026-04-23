@@ -8,7 +8,7 @@ const deleteTransaction=async(req,res,next)=>{
     if(!result){
         throw HttpError(404, "Not found")
     }
-    res.json(result)
+    res.json({ message: "Transaction deleted", id: result.id })
 
 }
 

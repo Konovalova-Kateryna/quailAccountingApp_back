@@ -104,7 +104,7 @@ const transactionSchema = new Schema(
     // Статус (більш деталізований стан для замовлень)
     status: {
       type: String,
-      enum: ["new", "processing", "completed", "canceled"],
+      enum: ["new", "processing", "completed", "cancelled"],
       default: "new",
     },
 

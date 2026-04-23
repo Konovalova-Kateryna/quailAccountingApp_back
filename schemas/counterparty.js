@@ -32,7 +32,7 @@ const schemas={
     addSchema
 }
 
-const Counterparty=model("counterparty", counterpartySchema);
+const Counterparty=model("Counterparty", counterpartySchema);
 
 module.exports={
     Counterparty,

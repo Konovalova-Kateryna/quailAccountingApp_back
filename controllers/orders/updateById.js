@@ -26,11 +26,17 @@ const updateOrder = async (req, res) => {
     order.totalAmount = totalAmount;
   }
 
+   // Статус замовлення може змінювати тільки адмін
+  
+    if (status       !== undefined){
+        if(!isAdmin){throw HttpError(403, "Only admin can change status");}
+     order.status       = status;
+  }
+
   // Оновлюємо решту полів якщо передано
   if (shippingDate !== undefined) order.shippingDate = shippingDate;
   if (isPaid       !== undefined) order.isPaid       = isPaid;
   if (isShipped    !== undefined) order.isShipped    = isShipped;
-  if (status       !== undefined) order.status       = status;
   if (comment      !== undefined) order.comment      = comment;
 
   await order.save();
