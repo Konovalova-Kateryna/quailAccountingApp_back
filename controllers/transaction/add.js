@@ -21,7 +21,7 @@ const addOrder=async(req, res)=>{
     counterparty,
   });   
     
-    const order=await Transaction.create({
+    const data=await Transaction.create({
         type:req.body.type || "order",
         owner:req.user._id,
         counterparty: resolvedCounterpartyId,
@@ -35,7 +35,7 @@ const addOrder=async(req, res)=>{
         comment:comment??null,
     })
 
-    res.status(201).json(order)
+    res.status(201).json(data)
 }
 
 module.exports=addOrder;
